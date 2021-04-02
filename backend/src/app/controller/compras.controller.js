@@ -17,7 +17,8 @@ exports.createCompra = async (req, res) => {
 };
 
 exports.listAllCompras = async (req, res) => {
-  const sql = "SELECT total, tipo_pagamento, status  FROM icts_test.compras";
+  const sql =
+    "SELECT id, total, tipo_pagamento, status  FROM icts_test.compras";
   await database.query(sql, (err, result, fields) => {
     if (err) throw err;
     res.status(200).send(result);

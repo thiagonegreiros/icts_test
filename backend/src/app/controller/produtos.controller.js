@@ -18,7 +18,16 @@ exports.createProduto = async (req, res) => {
 
 exports.listAllProduto = async (req, res) => {
   const sql =
-    "SELECT nome, descricao, preco, compras_id FROM icts_test.produto";
+    "SELECT id, nome, descricao, preco, compras_id FROM icts_test.produto";
+  await database.query(sql, (err, result, fields) => {
+    if (err) throw err;
+    res.status(200).send(result);
+  });
+};
+
+exports.listCompras = async (req, res) => {
+  const sql =
+    "SELECT  c.id, c.tipo_pagamento  from produto p INNER JOIN compras c on c.id = p.compras_id";
   await database.query(sql, (err, result, fields) => {
     if (err) throw err;
     res.status(200).send(result);

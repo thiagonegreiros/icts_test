@@ -12,6 +12,8 @@ const router = Router();
 
 router.get("/list", produtosController.listAllProduto);
 
+router.get("/listCompras", produtosController.listCompras);
+
 router.post("/create", produtosController.createProduto);
 
 router.get("/:id", produtosController.findProdutoById);
