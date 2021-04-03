@@ -6,11 +6,12 @@ import Header from './components/Header';
 import HomeProduto from './components/Produto/HomeProduto';
 import HomeCompra from './components/Compras/HomeCompra';
 import AddCompra from './components/Compras/AddCompra';
+import EditCompra from './components/Compras/EditCompra';
 
 
 const App = () =>  {
   return (
-    <div style={{maxWidth: "35rem", margin: "4rem auto"}}>
+    <div style={{maxWidth: "50rem", margin: "4rem auto"}}>
         <div>
           <NavbarBrand href="/">ICTS Test</NavbarBrand>
         </div>
@@ -22,6 +23,7 @@ const App = () =>  {
             {/* <Route path="/edit/:id" component={EditUser} /> */}
             <Route path="/homeCompra" component={HomeCompra} />
             <Route path="/addCompra" component={AddCompra} />
+            <Route path="/compra/edit/:id" component={EditCompra} />
           
         </Router>
       </div>

@@ -25,9 +25,10 @@ exports.listAllProduto = async (req, res) => {
   });
 };
 
-exports.listCompras = async (req, res) => {
-  const sql =
-    "SELECT  c.id, c.tipo_pagamento  from produto p INNER JOIN compras c on c.id = p.compras_id";
+exports.findCompraProduto = async (req, res) => {
+  const produtoId = parseInt(req.params.id);
+  const sql = "SELECT id from produto p where p.compras_id = " + [produtoId];
+
   await database.query(sql, (err, result, fields) => {
     if (err) throw err;
     res.status(200).send(result);

@@ -12,7 +12,7 @@ const router = Router();
 
 router.get("/list", produtosController.listAllProduto);
 
-router.get("/listCompras", produtosController.listCompras);
+router.get("/compra/:id", produtosController.findCompraProduto);
 
 router.post("/create", produtosController.createProduto);
 

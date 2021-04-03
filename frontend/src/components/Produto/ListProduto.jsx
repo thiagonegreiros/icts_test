@@ -19,6 +19,14 @@ const ListProduto = () => {
   }, []);
 
 
+  const removeProduto = (id) => {  
+    fetch('http://localhost:3334/produtos/' + id, {
+      method: 'DELETE',
+    })
+    .then(res => res.text()) // or res.json()
+    .then(res => console.log(res))
+  }
+
   return (
     <Table striped bordered hover>
       <thead>
@@ -39,7 +47,7 @@ const ListProduto = () => {
           <td>{product.preco}</td>
           <td>
             <Button variant="outline-warning">Edit</Button>
-            <Button variant="outline-danger">Delete</Button>
+            <Button variant="outline-danger" onClick={() => removeProduto(product.id)}>Delete</Button>
           </td>
         </tr>
       ))}

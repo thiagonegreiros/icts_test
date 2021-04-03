@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const ListCompra = () => {
   const [compras, setCompra] = useState([]);
@@ -17,6 +18,13 @@ const ListCompra = () => {
       });
   }, []);
 
+  const removeCompra = (id) => {  
+    fetch('http://localhost:3334/compras/' + id, {
+      method: 'DELETE',
+    })
+    .then(res => res.text()) // or res.json()
+    .then(res => console.log(res))
+  }
 
   return (
     <Table striped bordered hover>
@@ -37,8 +45,8 @@ const ListCompra = () => {
           <td>{compra.tipo_pagamento}</td>
           <td>{compra.status}</td>
           <td>
-            <Button variant="outline-warning">Edit</Button>
-            <Button variant="outline-danger">Delete</Button>
+            <Link className="btn btn-warning"  to={`/compra/edit/${compra.id}`} >Edit</Link>
+            <Button className="btn btn-danger" onClick={() => removeCompra(compra.id)}>Delete</Button>
           </td>
         </tr>
       ))}
