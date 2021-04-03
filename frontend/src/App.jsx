@@ -7,6 +7,7 @@ import HomeProduto from './components/Produto/HomeProduto';
 import HomeCompra from './components/Compras/HomeCompra';
 import AddCompra from './components/Compras/AddCompra';
 import EditCompra from './components/Compras/EditCompra';
+import EditProduto from './components/Produto/EditProduto';
 
 
 const App = () =>  {
@@ -20,6 +21,7 @@ const App = () =>  {
             <Route exact path="/" component={Header} />
             <Route path="/homeProduto" component={HomeProduto} />
             <Route path="/addProduto" component={AddProduto} />
+            <Route path="/produto/edit/:id" component={EditProduto} />
             {/* <Route path="/edit/:id" component={EditUser} /> */}
             <Route path="/homeCompra" component={HomeCompra} />
             <Route path="/addCompra" component={AddCompra} />

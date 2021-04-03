@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const ListProduto = () => {
   const [products, setProducts] = useState([]);
@@ -46,8 +47,8 @@ const ListProduto = () => {
           <td>{product.descricao}</td>
           <td>{product.preco}</td>
           <td>
-            <Button variant="outline-warning">Edit</Button>
-            <Button variant="outline-danger" onClick={() => removeProduto(product.id)}>Delete</Button>
+            <Link className="btn btn-warning"  to={`/produto/edit/${product.id}`}>Edit</Link>
+            <Button className="btn btn-danger" onClick={() => removeProduto(product.id)}>Delete</Button>
           </td>
         </tr>
       ))}

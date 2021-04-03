@@ -1,16 +1,46 @@
-import { Button } from "bootstrap";
-import { useState } from "react";
-import { Form } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const EditProduto = () => {
+const EditProduto = (props) => {
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
   const [preco, setPreco] = useState("");
   const [compras_id, setIdCompra] = useState("");
   const [compras, setCompra] = useState([]);
 
-  const editProduto = (id) => { }
+  const updateProduto = () => {
+    const currentProdutoId = props.match.params.id;
+
+    let _data = {
+      nome,
+      descricao,
+      preco,
+      compras_id,
+    }
+
+    fetch('http://localhost:3334/produtos/'+currentProdutoId, {
+      method: "PUT",
+      body: JSON.stringify(_data),
+      headers: {"Content-type": "application/json; charset=UTF-8"}
+    })
+    .then(response => response.json()) 
+    .then(json => console.log(json))
+    .catch (err => console.log(err));
+  }
+
+  useEffect(() => {
+    fetch("http://localhost:3334/compras/list")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setCompra(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <Form>
@@ -34,8 +64,8 @@ const EditProduto = () => {
           ))}
         </Form.Control>
       </Form.Group>
-      <Button variant="primary" type="button" onClick={editProduto}>
-        Salvar Produto
+      <Button variant="primary" type="button" onClick={updateProduto}>
+        Editar Produto
       </Button>
       <Link to="/" className="btn btn-danger ml-2">Cancel</Link>
     </Form>

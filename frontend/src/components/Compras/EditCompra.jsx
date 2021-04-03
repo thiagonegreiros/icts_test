@@ -2,12 +2,29 @@ import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const EditCompra = () => {
+const EditCompra = (props) => {
   const [total, setTotal] = useState("");
   const [tipoPagamento, setTipoPagamento] = useState("");
   const [status, setStatus] = useState("");
   
-  const editCompra = (id) => { }
+  const updateCompra = () => {
+    const currentCompraId = props.match.params.id;
+
+    let _data = {
+      total  : total,
+      tipo_pagamento: tipoPagamento,
+      status: status,
+    }
+
+    fetch('http://localhost:3334/compras/'+currentCompraId, {
+      method: "PUT",
+      body: JSON.stringify(_data),
+      headers: {"Content-type": "application/json; charset=UTF-8"}
+    })
+    .then(response => response.json()) 
+    .then(json => console.log(json))
+    .catch (err => console.log(err));
+  }
   
   return (
     <Form>
@@ -23,7 +40,7 @@ const EditCompra = () => {
         <Form.Label>Status</Form.Label>
         <Form.Control type="text" placeholder="Informe o status da compra" onChange={(event) => {setStatus(event.target.value) }}/>
       </Form.Group>
-      <Button variant="primary" type="button" onClick={editCompra}>
+      <Button variant="primary" type="button" onClick={updateCompra}>
         Editar Compra
       </Button>
       <Link to="/" className="btn btn-danger ml-2">Cancel</Link>
